@@ -37,7 +37,7 @@
           Add Text Block
         </button>
 
-        <button>
+        <button @click.prevent="saveBlocks">
           Save
         </button>
       </div>
@@ -54,7 +54,6 @@
           @delete="handleDelete"
         />
       </div>
-      {{activeBlock}}
     </div>
   </div>
 </template>
@@ -123,29 +122,55 @@ export default {
         self.updateTransformer()
       })
     },
+
+    /**
+     *  events of add / save blocks
+     */
     addNewBlock() {
-      let blockName = 'block-' + Date.now()
+      let blockName = 'block' + Date.now()
       let newBlock = {...this.defaultBlockAttribute, name: blockName, id: blockName}
+      if (this.blocks.length) {
+        let lastBlock = this.blocks[this.blocks.length-1]
+        newBlock = {...newBlock, fontFamily: lastBlock.fontFamily, fontSize: lastBlock.fontSize}
+      }
       this.blocks.push(newBlock)
 
       this.selectActiveBlock(blockName)
     },
+    saveBlocks() {
+      let exportData = this.blocks.map(
+        block => ({
+          text: block.text,
+          
+          x: block.cx,
+          y: block.cy,
+          width: block.cwidth,
+          height: block.cheight,
+
+          fontFamily: block.fontFamily,
+          fontSize: block.fontSize,
+
+          align: block.align,
+          verticalAlign: block.verticalAlign
+        })
+      )
+
+      console.log(JSON.stringify(exportData))
+    },
+
+    /**
+     *  events from attribute panels
+     */
     handleActiveBlockChange(blockName) {
       this.selectActiveBlock(blockName)
     },
     handleAttributeChange(payload) {
-      // console.log('attribute change: ', payload)
       let block = this.blocks.find(b => b.name === payload.blockName)
       block[payload.attributeName] = payload.attributeValue
 
+      // backup width, height info
       if (payload.attributeName === 'width' || payload.attributeName === 'height') {
         block['c' + payload.attributeName] = payload.attributeValue
-      }
-
-      if (payload.attributeName === 'fontFamily') {
-        let stage = this.$refs.stage.getStage()
-        let selectedNode = stage.findOne('.' + this.activeBlockName)
-        selectedNode.fontFamily(payload.attributeValue)
       }
     },
     handleDelete(blockName) {
@@ -157,6 +182,11 @@ export default {
 
       console.log('Deleted', block.text)
     },
+
+
+    /**
+     *  events from konva objects
+     */
     handleDragEnd(e) {
       this.activeBlock.cx = parseInt(e.target.x())
       this.activeBlock.cy = parseInt(e.target.y())

@@ -18,7 +18,7 @@
           FONT FACE
         </div>
         <div class="block-attribute__detail__section__body">
-          <font-picker api-key="replace-api-key-here" :active-font="attrs.fontFamily" @change="setFontFamily" />
+          <font-picker api-key="AIzaSyDQbiHQ2iamsHWa2XAAZgTj6VdQT0yK-6s" :active-font="attrs.fontFamily" @change="setFontFamily" :name="attrs.name" :id="'font-picker-'+attrs.name" />
         </div>
       </div>
       
@@ -28,6 +28,22 @@
           FONT SIZE
         </div>
         <div class="block-attribute__detail__section__body">
+          <select name="font-size" :value="attrs.fontSize" @change="setFontSize">
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="14">14</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+            <option value="20">20</option>
+            <option value="24">24</option>
+            <option value="28">28</option>
+            <option value="32">32</option>
+            <option value="36">36</option>
+            <option value="48">48</option>
+            <option value="72">72</option>
+          </select>
         </div>
       </div>
 
@@ -104,6 +120,13 @@ export default {
         blockName: this.attrs.name,
         attributeName: 'fontFamily',
         attributeValue: v.family
+      })
+    },
+    setFontSize(e) {
+      this.$emit('attributeChanged', {
+        blockName: this.attrs.name,
+        attributeName: 'fontSize',
+        attributeValue: parseInt(e.target.value)
       })
     },
     setAlign(v) {
