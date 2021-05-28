@@ -3956,6 +3956,20 @@ follow-redirects@^1.0.0:
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
   integrity sha512-HWqDgT7ZEkqRzBvc2s64vSZ/hfOceEol3ac/7tKwzuvEyWx3/4UegXh5oBOIotkGsObyk3xznnSRVADBgWSQVg==
 
+font-picker-vue@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/font-picker-vue/-/font-picker-vue-1.0.3.tgz#43f97ea806ce45f62905bfa73b478c8228f9d382"
+  integrity sha512-cX3TxdszpjSmN18sKh4egPrkDFptCmSCVDSI4pV/kaBF2WDBpy8s9Fxb4SW4FShv5eIcRAVYWxj3hepfDnp1HA==
+  dependencies:
+    font-picker "^2.0.6"
+
+font-picker@^2.0.6:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/font-picker/-/font-picker-2.2.1.tgz#a6f7605f430fc8be367fe2a1e0ecb61da0f4d91c"
+  integrity sha512-y+WmoTxrpHQB5cXzhETO3opVDvACq108InNV9oC6aLNObq1/FG5MW0N+/MgiY6vObnodNCRsqWJHyEarpRfaWw==
+  dependencies:
+    lodash.throttle "^4.1.1"
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -5339,6 +5353,11 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
+
+lodash.throttle@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
+  integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
 lodash.transform@^4.6.0:
   version "4.6.0"

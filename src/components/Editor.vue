@@ -63,7 +63,7 @@
 import BlockAttribute from './BlockAttribute.vue'
 import '../assets/styles/index.scss'
 
-const defaultFontFamily = 'Arial'
+const defaultFontFamily = 'Abel'
 const defaultFontSize = 16
 const selectedBorderColor='#00D2FF'
 const defaultWidth = 100
@@ -141,6 +141,12 @@ export default {
       if (payload.attributeName === 'width' || payload.attributeName === 'height') {
         block['c' + payload.attributeName] = payload.attributeValue
       }
+
+      if (payload.attributeName === 'fontFamily') {
+        let stage = this.$refs.stage.getStage()
+        let selectedNode = stage.findOne('.' + this.activeBlockName)
+        selectedNode.fontFamily(payload.attributeValue)
+      }
     },
     handleDelete(blockName) {
       this.selectActiveBlock('')
@@ -152,9 +158,10 @@ export default {
       console.log('Deleted', block.text)
     },
     handleDragEnd(e) {
-      console.log(e.target.text(), `moved to ${e.target.x()},${e.target.y()}`)
       this.activeBlock.cx = parseInt(e.target.x())
       this.activeBlock.cy = parseInt(e.target.y())
+
+      console.log(e.target.text(), `moved to ${this.activeBlock.cx},${this.activeBlock.cy}`)
     },
     handleMouseDown(e) {
       // if clicked on stage
@@ -198,8 +205,7 @@ export default {
       }
     },
     handleTransform() {
-      let transformerNode = this.$refs.transformer.getNode()
-      let stage = transformerNode.getStage()
+      let stage = this.$refs.stage.getStage()
       let selectedNode = stage.findOne('.' + this.activeBlockName)
 
       selectedNode.setAttrs({

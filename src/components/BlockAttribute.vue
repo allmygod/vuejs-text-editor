@@ -18,6 +18,7 @@
           FONT FACE
         </div>
         <div class="block-attribute__detail__section__body">
+          <font-picker api-key="replace-api-key-here" :active-font="attrs.fontFamily" @change="setFontFamily" />
         </div>
       </div>
       
@@ -46,8 +47,6 @@
             <i class="fas fa-align-right" />
           </a>
 
-          &nbsp;&nbsp;&nbsp;
-          
           <a href="#" :class="attrs.verticalAlign==='top' ? 'active' : ''" @click.prevent="setVAlign('top')">
             <i class="fas fa-sort-up" />
           </a>
@@ -76,6 +75,8 @@
 </template>
 
 <script>
+import FontPicker from 'font-picker-vue'
+
 export default {
   props: {
     attrs: {
@@ -84,6 +85,9 @@ export default {
     active: {
       type: Boolean
     }
+  },
+  components: {
+    FontPicker
   },
   data() {
     return {
@@ -94,6 +98,13 @@ export default {
     toggleDetailView() {
       this.showDetail = !this.showDetail
       this.$emit('activeBlockChanged', this.attrs.name)
+    },
+    setFontFamily(v) {
+      this.$emit('attributeChanged', {
+        blockName: this.attrs.name,
+        attributeName: 'fontFamily',
+        attributeValue: v.family
+      })
     },
     setAlign(v) {
       this.$emit('attributeChanged', {
