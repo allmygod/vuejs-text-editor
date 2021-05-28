@@ -1,0 +1,58 @@
+.block-attribute {
+  border: 1px solid $border-color;
+  padding: 4px 8px;
+  margin-bottom: 1px;
+  
+  a, i {
+    color: $color;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  &__detail {
+    margin-top: 12px;
+    font-size: 14px;
+
+    &__section {
+      margin: 12px 0;
+
+      &__title {
+        margin-bottom: 8px;
+      }
+      &__body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        a {
+          width: 26px;
+          text-align: center;
+          padding: 2px 0;
+          margin: 0 2px;
+
+          border: 1px solid $border-color;
+          border-radius: 10%;
+
+          &.active {
+            color: white;
+            background-color: $border-color;
+          }
+        }
+
+        input[type="number"] {
+          width: 54px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}
