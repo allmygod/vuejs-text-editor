@@ -131,7 +131,18 @@ export default {
       let newBlock = {...this.defaultBlockAttribute, name: blockName, id: blockName}
       if (this.blocks.length) {
         let lastBlock = this.blocks[this.blocks.length-1]
-        newBlock = {...newBlock, fontFamily: lastBlock.fontFamily, fontSize: lastBlock.fontSize}
+        newBlock = {
+          ...newBlock, 
+          fontFamily: lastBlock.fontFamily, 
+          fontSize: lastBlock.fontSize,
+          align: lastBlock.align,
+          verticalAlign: lastBlock.verticalAlign,
+
+          width: lastBlock.cwidth,
+          cwidth: lastBlock.cwidth,
+          height: lastBlock.cheight,
+          cheight: lastBlock.cheight
+        }
       }
       this.blocks.push(newBlock)
 
