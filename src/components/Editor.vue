@@ -23,7 +23,7 @@
           <v-transformer
             ref="transformer"
             :rotateEnabled="false"
-            :enabledAnchors="['middle-left', 'middle-right']"
+            :enabledAnchors="['middle-left', 'middle-right', 'top-center', 'bottom-center']"
             :borderStroke="selectedBorderColor"
             :anchorStroke="selectedBorderColor"
           />
@@ -276,7 +276,9 @@ export default {
 
       selectedNode.setAttrs({
         width: selectedNode.width() * selectedNode.scaleX(),
-        scaleX: 1
+        scaleX: 1,
+        height: selectedNode.height() * selectedNode.scaleY(),
+        scaleY: 1
       })
 
       // save dimension
