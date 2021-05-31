@@ -18,6 +18,7 @@
             @dblclick="handleInlineEdit"
             @dbltap="handleInlineEdit"
             :config="block"
+            :dragBoundFunc="handleDragBoundFunc"
           />
           <v-transformer
             ref="transformer"
@@ -128,7 +129,12 @@ export default {
      */
     addNewBlock() {
       let blockName = 'block' + Date.now()
-      let newBlock = {...this.defaultBlockAttribute, name: blockName, id: blockName}
+      let newBlock = {
+        ...this.defaultBlockAttribute, 
+        name: blockName, 
+        id: blockName
+      }
+
       if (this.blocks.length) {
         let lastBlock = this.blocks[this.blocks.length-1]
         newBlock = {
@@ -198,6 +204,25 @@ export default {
     /**
      *  events from konva objects
      */
+    handleDragBoundFunc(pos) {
+      let newX = pos.x, newY = pos.y
+      if (pos.x <= 0) {
+        newX = 0
+      } else if(pos.x + this.activeBlock.cwidth > this.width) {
+        newX = this.width - this.activeBlock.cwidth
+      }
+
+      if (pos.y <= 0) {
+        newY = 0
+      } else if(pos.y + this.activeBlock.cheight > this.height) {
+        newY = this.height - this.activeBlock.cheight
+      }
+
+      return {
+        x: newX,
+        y: newY
+      }
+    },
     handleDragEnd(e) {
       this.activeBlock.cx = parseInt(e.target.x())
       this.activeBlock.cy = parseInt(e.target.y())
